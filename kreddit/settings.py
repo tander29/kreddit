@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kreddit',
     'kreddit.kredditor',
-    'kreddit.post'
+    'kreddit.post',
+    'kreddit.comment',
+    'kreddit.message',
+    'kreddit.subkreddit'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'kreddit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'kreddit/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
