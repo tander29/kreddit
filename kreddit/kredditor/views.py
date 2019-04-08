@@ -16,11 +16,11 @@ def register(request):
         if form.is_valid():
             data = form.cleaned_data
             user = User.objects.create_user(
-                data['first_name'],
-                data['last_name'],
-                data['username'],
-                data['email'],
-                data['password']
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                username=data['username'],
+                email=data['email'],
+                password=data['password']
             )
 
             login(request, user)
@@ -29,7 +29,7 @@ def register(request):
                 user=user
             )
 
-            return HttpResponseRedirect(reverse('homepage.html'))
+            return HttpResponseRedirect(reverse('homepage'))
 
     form = Register()
 
