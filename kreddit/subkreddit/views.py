@@ -55,3 +55,4 @@ class SubKredditView(View):
                 body=data['body'],
                 subkreddit=SubKreddit.objects.filter(title=subkreddit).first()
             )
+        return HttpResponseRedirect(reverse('subkreddit', kwargs={"subkreddit": subkreddit}))
