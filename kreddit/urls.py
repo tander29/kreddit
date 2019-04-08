@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import homepage, login_view
 from .kredditor.urls import urlpatterns as kredditorurls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', homepage, name='homepage'),
+    path('login/', login_view)
 ]
 
 urlpatterns += kredditorurls
