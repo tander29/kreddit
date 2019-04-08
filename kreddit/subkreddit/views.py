@@ -13,21 +13,21 @@ class AllSubsView(View):
         response = {}
         form = self.form_class()
         response.update({"form": form})
-        # allsubs = [1, 2, 3]
         allsubs = SubKreddit.objects.all()
         response.update({'allsubs': allsubs})
         return render(request, "./subkreddit/allsubs.html", response)
 
     def post(self, request):
         form = self.form_class(request.POST)
-        if form.is_valid():
+        if form.is_valid() and hasattr(request.user, 'kredditor'):
             data = form.cleaned_data
             SubKreddit.objects.create(
-                title=data['title'],
+                title=data['title'].replace(" ", ""),
                 about=data['about'],
-                rules=data['rules']
+                rules=data['rules'],
+                user=request.user.kredditor
             )
-            return HttpResponseRedirect(reverse("homepage"))
+            return HttpResponseRedirect(reverse("subkreddits"))
         form = self.form_class()
         return render(request, "./subkreddit/allsubs.html", {"form": form})
 
@@ -41,8 +41,9 @@ class SubKredditView(View):
         html = "./subkreddit/subkreddit.html"
         sub = SubKreddit.objects.filter(title=subkreddit).first()
         posts = Post.objects.filter(subkreddit=sub).all()
-        response.update({"sub": sub, "form": form, "posts": posts})
-        print(posts[0].title)
+        response.update({"sub": sub, "form": form,
+                         "posts": posts, "validsub": bool(sub),
+                         "validuser": hasattr(request.user, 'kredditor')})
         return render(request, html, response)
 
     def post(self, request, subkreddit):
