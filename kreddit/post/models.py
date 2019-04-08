@@ -9,3 +9,4 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     body = models.CharField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True)
+    # upvotes = models.ManyToManyField(Kredditor, on_delete=models.CASCADE)
