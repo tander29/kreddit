@@ -1,5 +1,8 @@
-<h2>all subs:</h2>
+<h2>available subkreddits:</h2>
 
-{% for sub in allsubs %}
-<div>{{ sub }}</div>
-{% endfor%}
+{% for sub in allsubs %} ----------------
+<div>{{ sub.title }}</div>
+---------------- {% endfor%}
+
+<div>Add a new subkreddit:</div>
+{%include "../generic_form.html" %}

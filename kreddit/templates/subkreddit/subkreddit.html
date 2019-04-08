@@ -1,0 +1,16 @@
+<h1>Subkreddit:</h1>
+<h2>Title: {{ sub.title }}</h2>
+<h5>About: {{ sub.about }}</h5>
+<h5>Rules: {{ sub.rules }}</h5>
+
+<h2>New post</h2>
+{% include "../generic_form.html"%}
+
+<h4>Feed will go below here</h4>
+
+{% if posts %} {%for post in posts%}
+<div>Post------------</div>
+<div>{{ post.title }}</div>
+<div>{{ post.body }}</div>
+<div>Post------------</div>
+{%endfor%} {%endif%}
