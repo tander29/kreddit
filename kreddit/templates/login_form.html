@@ -7,10 +7,6 @@
     <title>kReddit | Log in</title>
 </head>
 <body>
-    <form action='' method='post'>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type='submit' value='Submit'>
-    </form>
+    {% include 'generic_form.html' %}
 </body>
 </html>
