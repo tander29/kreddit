@@ -10,9 +10,13 @@
 {% include "../generic_form.html"%} {%else%}
 <h2>Login to make a new post</h2>
 {%endif%} {% if posts %} {%for post in posts%}
+
 <div>Post------------</div>
-<div>{{ post.title }}</div>
+<a href="{%url 'post' sub.title post.pk%}">
+  <div>{{ post.title }}</div>
+</a>
 <div>{{ post.body }}</div>
+<div>Posted by: {{ post.user }}</div>
 <div>Post------------</div>
 {%endfor%} {%else%} No Post Yet, Kind of Telling if you Ask me {%endif%}
 {%else%}
