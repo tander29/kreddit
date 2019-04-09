@@ -30,8 +30,6 @@ class PostView(View):
         response = {}
         response.update({"form": self.form_class()})
         post = Post.objects.get(id=post_id)
-        print(dir(post.comment_set))
-        print(post.comment_set.get_queryset())
         response.update({"post": post})
         response.update({"comments": post.comment_set.get_queryset()})
         return render(request, "./post/post.html", response)

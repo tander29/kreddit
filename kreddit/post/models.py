@@ -4,8 +4,6 @@ from kreddit.subkreddit.models import SubKreddit
 
 
 class Post(models.Model):
-    # image?
-    # upvotes
     user = models.ForeignKey(Kredditor, on_delete=models.CASCADE, null=True)
     subkreddit = models.ForeignKey(
         SubKreddit, on_delete=models.CASCADE, null=True)
