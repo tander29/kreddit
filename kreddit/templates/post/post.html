@@ -2,4 +2,14 @@
   <h2>Title: {{ post.title }}</h2>
   <h4>Body: {{ post.body }}</h4>
   <h4>Posted by: {{ post.user }}</h4>
+  <h4>URL: {{ post.url }}</h4>
 </div>
+
+{%if request.user.is_active %} {% include "../generic_form.html" %} {%else%}
+<div>Login to comment</div>
+{% endif %} {%for comment in comments%} ------------------------
+<div>Commented by: {{ comment.user }}</div>
+<div>Commented by: {{ comment.body }}</div>
+<div>Commented by: {{ comment.date_created }}</div>
+------------------------ {%endfor%}
+<h3>End of Comments</h3>

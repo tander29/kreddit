@@ -26,6 +26,7 @@ class AllSubsView(View):
                 title=data['title'].replace(" ", ""),
                 about=data['about'],
                 rules=data['rules'],
+                url=data['url'],
                 user=request.user.kredditor
             )
             return HttpResponseRedirect(reverse("subkreddits"))
@@ -58,4 +59,5 @@ class SubKredditView(View):
                 body=data['body'],
                 subkreddit=SubKreddit.objects.filter(title=subkreddit).first()
             )
-        return HttpResponseRedirect(reverse('subkreddit', kwargs={"subkreddit": subkreddit}))
+        return HttpResponseRedirect(reverse('subkreddit',
+                                            kwargs={"subkreddit": subkreddit}))
