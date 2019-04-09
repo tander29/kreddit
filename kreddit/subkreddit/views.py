@@ -4,6 +4,7 @@ from .forms import NewSubkredditForm
 from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
+from kreddit.kredditor.models import Kredditor
 
 
 class AllSubsView(View):
@@ -50,7 +51,9 @@ class SubKredditView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            user = Kredditor.objects.get(pk=request.user.kredditor.pk)
             Post.objects.create(
+                user=user,
                 title=data['title'],
                 body=data['body'],
                 subkreddit=SubKreddit.objects.filter(title=subkreddit).first()
