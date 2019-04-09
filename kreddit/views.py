@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import Login
+from .post.models import Post
 
 
 @login_required()
@@ -38,3 +39,9 @@ def logout_link(request):
     logout(request)
 
     return HttpResponseRedirect(request.GET.get('next', '/'))
+
+
+def kredditor(request, user_id):
+    posts = Post.objects.filter(id=user_id)
+
+    return render(request, 'kredditor/profile.html', {'user': request.user, 'posts': posts})

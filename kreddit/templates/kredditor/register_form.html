@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>kReddit | Register</title>
-
-    <style>
-      /* Might use boostrap/materialize for styling instead. */
-    </style>
   </head>
   <body>
-    <form action="" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Submit" />
-    </form>
+    {% include 'generic_form.html' %}
+    <a href="/login">Login</a>
   </body>
 </html>
