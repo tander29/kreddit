@@ -1,5 +1,12 @@
-<h2>all subs:</h2>
+<h2>available subkreddits:</h2>
 
-{% for sub in allsubs %}
-<div>{{ sub }}</div>
-{% endfor%}
+<h3>subkreddit/</h3>
+{% for sub in allsubs %} ----------------
+<a href="{%url 'subkreddit' sub.title%}">
+  <div>{{ sub.title }}</div>
+</a>
+---------------- {% endfor%}
+<h3>Add a new subkreddit!</h3>
+{% if request.user.kredditor%} {%include "../generic_form.html" %} {%else%}
+<h4>Must be logged in</h4>
+{%endif%}

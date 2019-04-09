@@ -1,0 +1,19 @@
+<h1>Subkreddit:</h1>
+{% if validsub %}
+<h2>Title: {{ sub.title }}</h2>
+<h5>About: {{ sub.about }}</h5>
+<h5>Rules: {{ sub.rules }}</h5>
+
+{%if validuser %}
+<h2>New post</h2>
+{% include "../generic_form.html"%} {%else%}
+<h2>Login to make a new post</h2>
+{%endif%} {% if posts %} {%for post in posts%}
+<div>Post------------</div>
+<div>{{ post.title }}</div>
+<div>{{ post.body }}</div>
+<div>Post------------</div>
+{%endfor%} {%else%} No Post Yet, Kind of Telling if you Ask me {%endif%}
+{%else%}
+<h2>This sub doesn't seem to exist, Try creating one or go outside!</h2>
+{%endif%}

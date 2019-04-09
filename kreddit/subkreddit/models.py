@@ -1,5 +1,6 @@
 from django.db import models
 from kreddit.kredditor.models import Kredditor
+from django.core.validators import RegexValidator
 
 
 class SubKreddit(models.Model):

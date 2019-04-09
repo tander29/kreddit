@@ -1,6 +1,7 @@
 from django.urls import path
-from kreddit.subkreddit.views import AllSubs
+from kreddit.subkreddit.views import AllSubsView, SubKredditView
 
 urlpatterns = [
-    path('allsubs/', AllSubs.as_view(), name='allsubs')
+    path('subkreddit/', AllSubsView.as_view(), name='subkreddits'),
+    path('subkreddit/<subkreddit>', SubKredditView.as_view(), name='subkreddit')
 ]
