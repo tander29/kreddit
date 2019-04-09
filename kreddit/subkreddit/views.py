@@ -26,6 +26,7 @@ class AllSubsView(View):
                 title=data['title'].replace(" ", ""),
                 about=data['about'],
                 rules=data['rules'],
+                url=data['url'],
                 user=request.user.kredditor
             )
             return HttpResponseRedirect(reverse("subkreddits"))
