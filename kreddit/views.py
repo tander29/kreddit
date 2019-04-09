@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import Login
 
@@ -32,3 +32,9 @@ def login_view(request):
         form = Login()
 
     return render(request, 'login_form.html', {'form': form})
+
+
+def logout_link(request):
+    logout(request)
+
+    return HttpResponseRedirect(request.GET.get('next', '/'))
