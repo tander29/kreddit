@@ -7,9 +7,5 @@
 
 {%if request.user.is_active %} {% include "../generic_form.html" %} {%else%}
 <div>Login to comment</div>
-{% endif %} {%for comment in comments%} ------------------------
-<div>Commented by: {{ comment.user }}</div>
-<div>Commented by: {{ comment.body }}</div>
-<div>Commented by: {{ comment.date_created }}</div>
------------------------- {%endfor%}
+{% endif %} {%include "../comment/comment.html"%}
 <h3>End of Comments</h3>

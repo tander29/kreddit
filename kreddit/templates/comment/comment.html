@@ -1,0 +1,12 @@
+{%for comment in comments%} ------------------------
+<div>Commented by: {{ comment.user }}</div>
+<div>Commented by: {{ comment.body }}</div>
+<div>Commented by: {{ comment.date_created }}</div>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" name="upvote" value="{{ comment.id }}">Upvote</button>
+  <button type="submit" name="downvote" value="{{ comment.id }}">
+    Downvote
+  </button>
+</form>
+------------------------ {%endfor%}

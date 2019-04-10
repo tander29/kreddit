@@ -36,6 +36,16 @@ class PostView(View):
 
     def post(self, request, subkreddit, post_id):
         form = self.form_class(request.POST)
+
+        if "upvote" in request.POST:
+            print("yeah upvote")
+        if "downvote" in request.POST:
+            comment = Comment.objects.get(id=request.POST['downvote'])
+            print(comment)
+            print(request.user.kredditor)
+            comment.downvotes.add(request.user.kredditor)
+            comment.save()
+            print(comment.downvotes.all())
         if form.is_valid():
             data = form.cleaned_data
             Comment.objects.create(
