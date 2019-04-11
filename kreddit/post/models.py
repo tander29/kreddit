@@ -15,3 +15,6 @@ class Post(models.Model):
         Kredditor, related_name="upvotes", blank=True)
     downvotes = models.ManyToManyField(
         Kredditor, related_name="downvotes", blank=True)
+
+    def get_score(self):
+        return self.upvotes.count() - self.downvotes.count()

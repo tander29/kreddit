@@ -5,6 +5,7 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
+from .helper import toggle_post_upvotes
 
 
 class AllSubsView(View):
@@ -50,6 +51,7 @@ class SubKredditView(View):
 
     def post(self, request, subkreddit):
         form = self.form_class(request.POST)
+        toggle_post_upvotes(request)
         if form.is_valid():
             data = form.cleaned_data
             user = Kredditor.objects.get(pk=request.user.kredditor.pk)
