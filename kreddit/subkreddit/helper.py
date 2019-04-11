@@ -4,14 +4,13 @@ from kreddit.subkreddit.models import SubKreddit
 
 def toggle_post_upvotes(request):
     if "upvote" in request.POST:
-        print("yeah upvote")
         post = Post.objects.get(id=request.POST['upvote'])
         if request.user.kredditor in post.upvotes.all():
             post.upvotes.remove(request.user.kredditor)
         else:
             post.downvotes.remove(request.user.kredditor)
             post.upvotes.add(request.user.kredditor)
-        print(post.upvotes.all())
+        post.save()
     if "downvote" in request.POST:
         post = Post.objects.get(id=request.POST['downvote'])
         if request.user.kredditor in post.downvotes.all():
@@ -20,7 +19,6 @@ def toggle_post_upvotes(request):
             post.upvotes.remove(request.user.kredditor)
             post.downvotes.add(request.user.kredditor)
         post.save()
-        print(post.downvotes.all())
     return
 
 
@@ -42,3 +40,9 @@ def toggle_subscribe(request):
         sub_k = SubKreddit.objects.get(id=request.POST["unsubscribe"])
         sub_k.subscribers.remove(current_user)
         sub_k.save()
+
+
+def sort_posts(posts):
+    sorted_posts = sorted(posts, reverse=True,
+                          key=lambda post: post.get_score())
+    return sorted_posts

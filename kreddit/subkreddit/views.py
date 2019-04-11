@@ -5,7 +5,11 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
+<<<<<<< HEAD
 from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check
+=======
+from .helper import toggle_post_upvotes, sort_posts
+>>>>>>> 8efad50a9486dd815dde69ae34c804eedf257582
 
 
 class AllSubsView(View):
@@ -42,7 +46,7 @@ class SubKredditView(View):
         form = self.form_class()
         html = "./subkreddit/subkreddit.html"
         sub = SubKreddit.objects.filter(title=subkreddit).first()
-        posts = Post.objects.filter(subkreddit=sub).all()
+        posts = sort_posts(Post.objects.filter(subkreddit=sub).all())
         response.update({"sub": sub, "form": form,
                          "posts": posts, "validsub": bool(sub),
                          "is_subbed": subscriber_check(request, sub),

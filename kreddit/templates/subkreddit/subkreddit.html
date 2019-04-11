@@ -24,6 +24,7 @@
     <h2>Login to make a new post</h2>
   {%endif%} 
 
+<<<<<<< HEAD
 {% if posts %}
   {%for post in posts%}
     <div>Post------------</div>
@@ -42,6 +43,25 @@
     </form>
     <div>Post------------</div>
   {%endfor%} 
+=======
+<div>Post------------</div>
+<a href="{%url 'post' sub.title post.pk%}">
+  <div>{{ post.title }}</div>
+</a>
+<div>Posted by: {{ post.user }}</div>
+<div>Kreddit Score: {{ post.get_score }}</div>
+<div>Date Created: {{ post.date_created }}</div>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
+  <button type="submit" name="downvote" value="{{ post.id }}">
+    Downvote
+  </button>
+</form>
+<div>Post------------</div>
+{%endfor%} {%else%} No Post Yet, Kind of Telling if you Ask me {%endif%}
+>>>>>>> 8efad50a9486dd815dde69ae34c804eedf257582
 {%else%}
   No Post Yet, Kind of Telling if you Ask me
 {%endif%}
