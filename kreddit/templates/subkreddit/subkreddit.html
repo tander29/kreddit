@@ -1,7 +1,8 @@
+<style></style>
 {% include "../navbar.html" %}
-<h1>Subkreddit:</h1>
+
 {% if validsub %}
-<h2>Title: {{ sub.title }}</h2>
+<h1>{{ sub.title }}</h1>
 <h5>About: {{ sub.about }}</h5>
 <h5>Rules: {{ sub.rules }}</h5>
 
@@ -22,4 +23,3 @@
 {%else%}
 <h2>This sub doesn't seem to exist, Try creating one or go outside!</h2>
 {%endif%}
-<a href="/subkreddit"> < Back</a>
