@@ -45,3 +45,11 @@ def kredditor(request, user_id):
     posts = Post.objects.filter(id=user_id)
 
     return render(request, 'kredditor/profile.html', {'user': request.user, 'posts': posts})
+
+
+def handler4xx(request, *args, **kwargs):
+    return render(request, 'errorhandling/404.html', status=404)
+
+
+def handler5xx(request, *args, **kwargs):
+    return render(request, 'errorhandling/500.html', status=500)

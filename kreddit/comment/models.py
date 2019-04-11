@@ -12,3 +12,13 @@ class Comment(models.Model):
         Kredditor, related_name="commentupvotes", blank=True)
     downvotes = models.ManyToManyField(
         Kredditor, related_name="commentdownvotes", blank=True)
+
+    def get_score(self):
+        return self.upvotes.count() - self.downvotes.count()
+
+    # stretch goal: have value that determines order to appear based on time and score i.e every hour create hidden score=score-time that has passed
+    # def hidden(self):
+    #     # time detla is time between two times
+    #     # turn into time stamp
+    #     # return self.get_score - (time created - current time/60)
+    #     pass

@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from .forms import PostForm
 from .models import Post
+from .helper import toggle_comment_upvotes
 from django.views import View
 from kreddit.kredditor.models import Kredditor
 from kreddit.comment.forms import CommentForm
@@ -36,16 +37,7 @@ class PostView(View):
 
     def post(self, request, subkreddit, post_id):
         form = self.form_class(request.POST)
-
-        if "upvote" in request.POST:
-            print("yeah upvote")
-        if "downvote" in request.POST:
-            comment = Comment.objects.get(id=request.POST['downvote'])
-            print(comment)
-            print(request.user.kredditor)
-            comment.downvotes.add(request.user.kredditor)
-            comment.save()
-            print(comment.downvotes.all())
+        toggle_comment_upvotes(request)
         if form.is_valid():
             data = form.cleaned_data
             Comment.objects.create(

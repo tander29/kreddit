@@ -5,6 +5,7 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
+from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check
 
 
 class AllSubsView(View):
@@ -23,11 +24,10 @@ class AllSubsView(View):
         if form.is_valid() and hasattr(request.user, 'kredditor'):
             data = form.cleaned_data
             SubKreddit.objects.create(
+                creator=request.user.kredditor,
                 title=data['title'].replace(" ", ""),
                 about=data['about'],
-                rules=data['rules'],
-                url=data['url'],
-                user=request.user.kredditor
+                rules=data['rules']
             )
             return HttpResponseRedirect(reverse("subkreddits"))
         form = self.form_class()
@@ -45,11 +45,14 @@ class SubKredditView(View):
         posts = Post.objects.filter(subkreddit=sub).all()
         response.update({"sub": sub, "form": form,
                          "posts": posts, "validsub": bool(sub),
+                         "is_subbed": subscriber_check(request, sub),
                          "validuser": hasattr(request.user, 'kredditor')})
         return render(request, html, response)
 
     def post(self, request, subkreddit):
         form = self.form_class(request.POST)
+        toggle_post_upvotes(request)
+        toggle_subscribe(request)
         if form.is_valid():
             data = form.cleaned_data
             user = Kredditor.objects.get(pk=request.user.kredditor.pk)
@@ -57,11 +60,8 @@ class SubKredditView(View):
                 user=user,
                 title=data['title'],
                 body=data['body'],
+                url=data['url'],
                 subkreddit=SubKreddit.objects.filter(title=subkreddit).first()
             )
         return HttpResponseRedirect(reverse('subkreddit',
                                             kwargs={"subkreddit": subkreddit}))
-
-
-def subkreddit_subscribe(request):
-    
