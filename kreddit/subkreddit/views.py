@@ -5,7 +5,7 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
-from .helper import toggle_post_upvotes
+from .helper import toggle_post_upvotes, sort_posts
 
 
 class AllSubsView(View):
@@ -43,9 +43,7 @@ class SubKredditView(View):
         form = self.form_class()
         html = "./subkreddit/subkreddit.html"
         sub = SubKreddit.objects.filter(title=subkreddit).first()
-        unsorted_post = Post.objects.filter(subkreddit=sub).all()
-        posts = sorted(unsorted_post, reverse=True,
-                       key=lambda post: post.get_score())
+        posts = sort_posts(Post.objects.filter(subkreddit=sub).all())
         response.update({"sub": sub, "form": form,
                          "posts": posts, "validsub": bool(sub),
                          "validuser": hasattr(request.user, 'kredditor')})

@@ -28,15 +28,13 @@ class PostView(View):
 
     def get(self, request, subkreddit, post_id):
         response = {}
-        response.update({"form": self.form_class()})
         post = Post.objects.get(id=post_id)
+        comments = sort_comments(post.comment_set.get_queryset())
+
         response.update({"post": post})
-        comment_query = post.comment_set.get_queryset()
-        sorted_comments = sorted(
-            comment_query, reverse=True,
-            key=lambda comment: comment.get_score())
+        response.update({"form": self.form_class()})
         response.update(
-            {"comments": sorted_comments})
+            {"comments": comments})
         return render(request, "./post/post.html", response)
 
     def post(self, request, subkreddit, post_id):

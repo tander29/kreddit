@@ -18,5 +18,10 @@ def toggle_post_upvotes(request):
             post.upvotes.remove(request.user.kredditor)
             post.downvotes.add(request.user.kredditor)
         post.save()
-        print(post.downvotes.all())
     return
+
+
+def sort_posts(posts):
+    sorted_posts = sorted(posts, reverse=True,
+                          key=lambda post: post.get_score())
+    return sorted_posts
