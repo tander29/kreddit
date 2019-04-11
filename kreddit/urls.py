@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import homepage, login_view, logout_link, kredditor
+from .views import homepage, login_view, logout_link, kredditor, handler4xx, handler5xx
 from .kredditor.urls import urlpatterns as kredditorurls
 from .post.urls import urlpatterns as posturls
 from .subkreddit.urls import urlpatterns as subkredditurls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,9 @@ urlpatterns = [
     path('logout/', logout_link),
     path('kredditor/<int:user_id>', kredditor)
 ]
+
+handler404 = handler4xx
+handler500 = handler5xx
 
 urlpatterns += kredditorurls
 urlpatterns += posturls
