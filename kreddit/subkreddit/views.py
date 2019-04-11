@@ -61,3 +61,7 @@ class SubKredditView(View):
             )
         return HttpResponseRedirect(reverse('subkreddit',
                                             kwargs={"subkreddit": subkreddit}))
+
+
+def subkreddit_subscribe(request):
+    
