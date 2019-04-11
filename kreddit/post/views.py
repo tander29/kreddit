@@ -1,9 +1,8 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from .forms import PostForm
 from .models import Post
-from .helper import toggle_comment_upvotes
+from .helper import toggle_comment_upvotes, sort_comments
 from django.views import View
-from kreddit.kredditor.models import Kredditor
 from kreddit.comment.forms import CommentForm
 from kreddit.comment.models import Comment
 "Post belong to subkreddit, comment belong to post"
@@ -32,7 +31,12 @@ class PostView(View):
         response.update({"form": self.form_class()})
         post = Post.objects.get(id=post_id)
         response.update({"post": post})
-        response.update({"comments": post.comment_set.get_queryset()})
+        comment_query = post.comment_set.get_queryset()
+        sorted_comments = sorted(
+            comment_query, reverse=True,
+            key=lambda comment: comment.get_score())
+        response.update(
+            {"comments": sorted_comments})
         return render(request, "./post/post.html", response)
 
     def post(self, request, subkreddit, post_id):

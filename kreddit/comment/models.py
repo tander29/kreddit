@@ -1,6 +1,7 @@
 from django.db import models
 from kreddit.kredditor.models import Kredditor
 from kreddit.post.models import Post
+import datetime
 
 
 class Comment(models.Model):
@@ -18,7 +19,7 @@ class Comment(models.Model):
 
     # stretch goal: have value that determines order to appear based on time and score i.e every hour create hidden score=score-time that has passed
     # def hidden(self):
-    #     # time detla is time between two times
-    #     # turn into time stamp
-    #     # return self.get_score - (time created - current time/60)
-    #     pass
+    #     current_time = datetime.datetime.now()
+    #     difference = current_time - self.date_created
+    #     datetime.timedelta(0, 8, 562000)
+    #     return divmod(difference.days * 86400 + difference.seconds, 60)

@@ -21,3 +21,7 @@ def toggle_comment_upvotes(request):
         comment.save()
         print(comment.downvotes.all())
     return
+
+
+def sort_comments(comments):
+    pass

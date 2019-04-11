@@ -18,6 +18,7 @@
 <div>Posted by: {{ post.user }}</div>
 <div>Kreddit Score: {{ post.get_score }}</div>
 <div>Date Created: {{ post.date_created }}</div>
+
 <form method="post">
   {% csrf_token %}
   <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>

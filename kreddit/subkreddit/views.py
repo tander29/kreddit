@@ -43,7 +43,9 @@ class SubKredditView(View):
         form = self.form_class()
         html = "./subkreddit/subkreddit.html"
         sub = SubKreddit.objects.filter(title=subkreddit).first()
-        posts = Post.objects.filter(subkreddit=sub).all()
+        unsorted_post = Post.objects.filter(subkreddit=sub).all()
+        posts = sorted(unsorted_post, reverse=True,
+                       key=lambda post: post.get_score())
         response.update({"sub": sub, "form": form,
                          "posts": posts, "validsub": bool(sub),
                          "validuser": hasattr(request.user, 'kredditor')})
