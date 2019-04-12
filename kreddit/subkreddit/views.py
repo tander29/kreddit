@@ -5,11 +5,7 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
-<<<<<<< HEAD
-from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check
-=======
-from .helper import toggle_post_upvotes, sort_posts
->>>>>>> 8efad50a9486dd815dde69ae34c804eedf257582
+from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check, sort_posts
 
 
 class AllSubsView(View):

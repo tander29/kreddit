@@ -36,10 +36,11 @@ def toggle_subscribe(request):
         sub_k = SubKreddit.objects.get(id=request.POST["subscribe"])
         sub_k.subscribers.add(current_user)
         sub_k.save()
-    if "unsubscribed" in request.POST:
+    if "unsubscribe" in request.POST:
         sub_k = SubKreddit.objects.get(id=request.POST["unsubscribe"])
         sub_k.subscribers.remove(current_user)
         sub_k.save()
+    return
 
 
 def sort_posts(posts):

@@ -1,0 +1,26 @@
+{%if posts%} {%for post in posts%} 
+<div class="card add-card-space bg-light mb-3 border-info">
+ <a href="{%url 'post' post.subkreddit.title post.pk%}">
+ <h2 class="card-title">{{ post.title }}</h2>
+</a>
+  <h4 class="card-text">Posted by: 
+    <!-- <a href="{%url 'kredditor' post.user.id%}"> -->
+      u/{{ post.user }}
+    <!-- </a> -->
+  </h4>
+  <h4 class="card-text">Kreddit Score: {{ post.get_score }}</h4>
+
+
+  <a href="{% url 'subkreddit' post.subkreddit.title %}"><h5 class="card-text">k/{{ post.subkreddit.title }}</h5></a>
+  
+  
+  <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
+      <button type="submit" name="downvote" value="{{ post.id }}">
+        Downvote
+      </button>
+</div>
+{%endfor%} {%else%}
+<div>No kreddit here</div>
+{%endif%}

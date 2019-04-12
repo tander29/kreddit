@@ -26,7 +26,7 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('login/', login_view),
     path('logout/', logout_link),
-    path('kredditor/<int:user_id>', kredditor)
+    path('kredditor/<int:user_id>', kredditor, name='kredditor')
 ]
 
 handler404 = handler4xx
