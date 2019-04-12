@@ -21,12 +21,14 @@ def register(request):
                 username=data['username'],
                 email=data['email'],
                 password=data['password']
+
             )
 
             login(request, user)
 
             Kredditor.objects.create(
-                user=user
+                user=user,
+                bio=data['bio']
             )
 
             return HttpResponseRedirect(reverse('homepage'))

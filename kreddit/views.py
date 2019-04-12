@@ -61,7 +61,7 @@ def logout_link(request):
 
 
 def kredditor(request, user_id):
-    user = User.objects.get(id=user_id)
+    user = User.objects.get(pk=user_id)
     posts = sort_posts(Post.objects.filter(user=user.kredditor))
     created_subs = SubKreddit.objects.filter(creator=user.kredditor)
     subs_list = []

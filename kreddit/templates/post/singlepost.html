@@ -1,33 +1,40 @@
-{%if posts%} 
-  {%for post in posts%}
-    <div class="card container add-card-space bg-light mb-3 border-info">
-      <div class="row align-self-start">
-        <div class="col-9">
-          <h2>
-              <a href="{%url 'post' post.subkreddit.title post.pk%}">
-                {{ post.title }}
-              </a> in <a href="{% url 'subkreddit' post.subkreddit.title %}">k/{{ post.subkreddit.title }}</a>
-          </h2>
-        </div>
-        <div class="col-9">
-          <h5>u/{{ post.user }}</h5>
-        </div>
-        <div class="col-9">
-          <p>{{ post.body }}</p>
-        </div>
-      </div>
-      <div class="row align-self-end">
-        <h4>{{ post.get_score }} </h4>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
-            <button type="submit" name="downvote" value="{{ post.id }}">
-              Downvote
-            </button>
-        </form>
-      </div>
+{%if posts%} {%for post in posts%}
+<div class="card container add-card-space bg-light mb-3 border-info">
+  <div class="row align-self-start">
+    <div class="col-9">
+      <h2>
+        <a href="{%url 'post' post.subkreddit.title post.pk%}">
+          {{ post.title }}
+        </a>
+        in
+        <a href="{% url 'subkreddit' post.subkreddit.title %}"
+          >k/{{ post.subkreddit.title }}</a
+        >
+      </h2>
     </div>
-  {%endfor%} 
-  {%else%}
-  <div>No kreddit here</div>
+    <div class="col-9">
+      <h5>u/{{ post.user }}</h5>
+    </div>
+    <div class="col-9">
+      <p>{{ post.body }}</p>
+      {%if post.url%}
+      <a href="{{ post.url }}" target="_blank"
+        ><p>{{ post.url }}</p>
+      </a>
+      {%endif%}
+    </div>
+  </div>
+  <div class="row align-self-end">
+    <h4>{{ post.get_score }}</h4>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
+      <button type="submit" name="downvote" value="{{ post.id }}">
+        Downvote
+      </button>
+    </form>
+  </div>
+</div>
+{%endfor%} {%else%}
+<div>No kreddit here</div>
 {%endif%}

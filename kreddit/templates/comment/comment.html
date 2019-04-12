@@ -1,9 +1,8 @@
 {%for comment in comments%} ------------------------
-<div>Commented by: {{ comment.user }}</div>
-<div>Commented by: {{ comment.body }}</div>
-<div>Commented by: {{ comment.date_created }}</div>
+<div>u/{{ comment.user }}</div>
+<div>{{ comment.body }}</div>
+<div>{{ comment.date_created }}</div>
 <div>Commented by: {{ comment.get_score }}</div>
-<div>Commented by: {{ comment.hidden }}</div>
 <form method="post">
   {% csrf_token %}
   <button type="submit" name="upvote" value="{{ comment.id }}">Upvote</button>

@@ -1,6 +1,6 @@
 <style>
   h1 {
-    text-align: center
+    text-align: center;
   }
   .wrapper {
     margin: 10px auto;
@@ -31,6 +31,7 @@
           <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
           <h3 class="card-subtitle mb-2 text-muted">u/{{ user.username }}</h3>
           <p class="card-text">Kredditscore: Working on it</p>
+          <p class="card-text">Bio: {{ user.kredditor.bio }}</p>
           <p class="card-text">
             Joined the Kreddit Kommunity on {{ user.date_joined }}
           </p>
