@@ -11,6 +11,7 @@ class Post(models.Model):
     body = models.CharField(max_length=500)
     date_created = models.DateTimeField(auto_now_add=True)
     url = models.URLField(max_length=200)
+    # url_img = models.ImageField(upload_to='screenshots/')
     upvotes = models.ManyToManyField(
         Kredditor, related_name="upvotes", blank=True)
     downvotes = models.ManyToManyField(

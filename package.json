@@ -1,0 +1,23 @@
+{
+  "name": "kreddit",
+  "version": "1.0.0",
+  "description": "Kewl + Reddit = Kreddit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tander29/kreddit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tander29/kreddit/issues"
+  },
+  "homepage": "https://github.com/tander29/kreddit#readme",
+  "dependencies": {
+    "phantomjs2": "^2.2.0"
+  }
+}

@@ -23,7 +23,6 @@ def toggle_post_upvotes(request):
 
 
 def subscriber_check(request, sub):
-    print(sub.subscribers.get_queryset().all())
     if request.user.kredditor in sub.subscribers.get_queryset().all():
         return True
     else:

@@ -133,3 +133,7 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
 
 LOGOUT_REDIRECT_URL = '/login/'
+
+MEDIA_ROOT = '/kreddit/kreddit/'
+
+MEDIA_URL = '/'

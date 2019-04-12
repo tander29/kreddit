@@ -5,11 +5,8 @@ from .models import SubKreddit
 from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
-<<<<<<< HEAD
-from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check
-=======
-from .helper import toggle_post_upvotes, sort_posts
->>>>>>> 8efad50a9486dd815dde69ae34c804eedf257582
+from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check, sort_posts
+# from selenium import webdriver
 
 
 class AllSubsView(View):
@@ -60,6 +57,9 @@ class SubKredditView(View):
         if form.is_valid():
             data = form.cleaned_data
             user = Kredditor.objects.get(pk=request.user.kredditor.pk)
+            # driver = webdriver.PhantomJS()
+            # driver.get(data['url'])
+            # driver.save_screenshot(data['title'] + '.png')
             Post.objects.create(
                 user=user,
                 title=data['title'],
