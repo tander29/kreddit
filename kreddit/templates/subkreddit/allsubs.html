@@ -2,24 +2,28 @@
   h1 {
     text-align: center;
   }
+  h3 {
+    margin: 0 auto;
+    width: 1200px
+  }
   .subk-list {
-    overflow: hidden;
+    height: 290px;
+    overflow: scroll;
   }
   .subk-wrap {
-    margin: 10px auto;
+    margin: 20px auto;
     width: 800px;
   }
   .add-subk-wrap {
-    margin: 10px auto;
+    margin: 20px auto;
     width: 1200px;
   }
   .add-subk-body {
-    justify-content: center;
-    align-items: center;
+    text-align: center
   }
 </style>
-{% include 'navbar.html' %}
 <h1>SubKreddits</h1>
+{% include 'navbar.html' %}
 
 <div class="card add-subk-wrap">
   <div class="card-header">
@@ -36,6 +40,7 @@
   {% endif %}
 </div>
 
+<h3>Current SubKreddits:</h3>
 <div class="subk-list">
   {% for sub in allsubs %}
   <div class="card subk-wrap">

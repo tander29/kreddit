@@ -6,10 +6,7 @@ from kreddit.post.forms import PostForm
 from kreddit.post.models import Post
 from kreddit.kredditor.models import Kredditor
 from .helper import toggle_post_upvotes, toggle_subscribe, subscriber_check, sort_posts
-<<<<<<< HEAD
 # from selenium import webdriver
-=======
->>>>>>> e955e510bf57fa279c377aa3b3c2f853991ae838
 
 
 class AllSubsView(View):

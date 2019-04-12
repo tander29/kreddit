@@ -26,16 +26,21 @@
     .add-card-space {
       margin: 20px auto;
     }
+    .post-list {
+      height: 650px;
+      overflow: scroll
+    }
   </style>
   <body>
+    <h1>Home</h1>
     {% include 'navbar.html' %}
     <div class="container">
       <div class="row">
-        <div class="col-9">
+        <div class="col-9 post-list">
           {%include './post/singlepost.html'%}
         </div>
         <div class="col">
-          <div>Subscriptions:</div>
+          <h2>Subscriptions:</h2>
           {%include "./subkreddit/subscriptionlist.html"%}
         </div>
       </div>

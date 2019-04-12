@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>kReddit | Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {width: 600px; margin: 0 auto}
+        .wrapper {top: 100px; padding: 100px 60px; text-align: center}
+    </style>
   </head>
   <body>
-    {% include 'generic_form.html' %}
-    <a href="/login">Login</a>
+    <div class="card wrapper">
+        <h1>Welcome to kReddit! Register and become a part of the community!</h1>
+        {% include 'generic_form.html' %}
+        <p>Already a part of the team? <a href="/login">Login!</a></p>
+    </div>
   </body>
 </html>
