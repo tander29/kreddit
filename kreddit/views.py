@@ -1,14 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import Login
 from .post.models import Post
+from .subkreddit.models import SubKreddit
+from .subkreddit.helper import sort_posts, toggle_post_upvotes
+from .kredditor.models import Kredditor, User
 
 
 @login_required()
 def homepage(request):
-    return render(request, 'homepage.html')
+    response = {}
+    subscribed = SubKreddit.objects.filter(
+        subscribers=request.user.kredditor.id)
+    # initializes posts as empty query
+    posts = Post.objects.none()
+    subkreddit_list = []
+    for subkreddit in subscribed:
+        find_posts = Post.objects.filter(subkreddit=subkreddit).all()
+        posts = posts | find_posts
+        subkreddit_list.append(subkreddit.title)
+    response.update({'posts': sort_posts(posts),
+                     "subscribed": subkreddit_list})
+
+    if request.method == 'POST':
+        toggle_post_upvotes(request)
+        return HttpResponseRedirect(reverse("homepage"))
+    return render(request, 'homepage.html', response)
 
 
 def login_view(request):
@@ -42,9 +61,23 @@ def logout_link(request):
 
 
 def kredditor(request, user_id):
-    posts = Post.objects.filter(id=user_id)
+    user = User.objects.get(id=user_id)
+    posts = sort_posts(Post.objects.filter(user=user.kredditor))
+    created_subs = SubKreddit.objects.filter(creator=user.kredditor)
+    subs_list = []
 
-    return render(request, 'kredditor/profile.html', {'user': request.user, 'posts': posts})
+    for sub in created_subs:
+        subs_list.append(sub.title)
+
+    if request.method == 'POST':
+        toggle_post_upvotes(request)
+        return HttpResponseRedirect(reverse("kredditor",
+                                            kwargs={'user_id': user_id}))
+
+    return render(request, 'kredditor/profile.html',
+                  {'user': user,
+                   'posts': posts,
+                   "subscribed": subs_list})
 
 
 def handler4xx(request, *args, **kwargs):

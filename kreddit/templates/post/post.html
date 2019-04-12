@@ -4,6 +4,7 @@
   <h4>Body: {{ post.body }}</h4>
   <h4>Posted by: {{ post.user }}</h4>
   <h4>URL: {{ post.url }}</h4>
+  <h5>Sub: {{ sub.title }}</h5>
 </div>
 
 {%if request.user.is_active %} {% include "../generic_form.html" %} {%else%}

@@ -1,9 +1,22 @@
 <style>
-  h1 {text-align: center}
-  .subk-list {overflow: hidden}
-  .subk-wrap {margin: 10px auto; width: 800px}
-  .add-subk-wrap {margin: 10px auto; width: 1200px}
-  .add-subk-body {justify-content: center; align-items: center}
+  h1 {
+    text-align: center;
+  }
+  .subk-list {
+    overflow: hidden;
+  }
+  .subk-wrap {
+    margin: 10px auto;
+    width: 800px;
+  }
+  .add-subk-wrap {
+    margin: 10px auto;
+    width: 1200px;
+  }
+  .add-subk-body {
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 {% include 'navbar.html' %}
 <h1>SubKreddits</h1>
@@ -13,25 +26,28 @@
     <h3>Add a new subkreddit!</h3>
   </div>
   {% if request.user.kredditor %}
-    <div class="card-body add-subk-body">
-      {% include "../generic_form.html" %}
-    </div>
+  <div class="card-body add-subk-body">
+    {% include "../generic_form.html" %}
+  </div>
   {% else %}
-    <div class="card-body">
-      <h4>Must be logged in</h4>
-    </div>
+  <div class="card-body">
+    <h4>Must be logged in</h4>
+  </div>
   {% endif %}
 </div>
 
 <div class="subk-list">
   {% for sub in allsubs %}
-    <div class="card subk-wrap">
-      <div class="card-header">
-        <h5><a href="{% url 'subkreddit' sub.title %}">k/{{ sub.title }}</a> by {{ sub.creator }}</h5>
-      </div>
-      <div class="card-body">
-        {{ sub.about }}
-      </div>
+  <div class="card subk-wrap">
+    <div class="card-header">
+      <h5>
+        <a href="{% url 'subkreddit' sub.title %}">k/{{ sub.title }}</a> by
+        {{ sub.creator }}
+      </h5>
     </div>
+    <div class="card-body">
+      {{ sub.about }}
+    </div>
+  </div>
   {% endfor%}
 </div>

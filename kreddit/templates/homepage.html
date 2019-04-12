@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>kReddit | Home</title>
-</head>
-<body>
+  </head>
+  <style>
+    h1 {
+      text-align: center;
+    }
+    .subk-wrap {
+      margin: 10px auto;
+      width: 800px;
+      background-color: aquamarine;
+    }
+    .add-subk-wrap {
+      margin: 10px auto;
+      /* width: 60%; */
+    }
+    .add-subk-body {
+      justify-content: center;
+      align-items: center;
+    }
+    .add-card-space {
+      margin: 20px auto;
+    }
+  </style>
+  <body>
     {% include 'navbar.html' %}
-    Home
-</body>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          {%include './post/singlepost.html'%}
+        </div>
+        <div class="col">
+          <div>Subscriptions:</div>
+          {%include "./subkreddit/subscriptionlist.html"%}
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

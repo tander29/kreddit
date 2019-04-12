@@ -1,0 +1,9 @@
+{%for subscription in subscribed%}
+<a href="{% url 'subkreddit' subscription %}">
+  <div>k/{{ subscription }}</div>
+</a>
+{%endfor%}
+<div>_____</div>
+<a href="{% url 'subkreddits' %}">
+  <div>Explore and Add Subscriptions</div>
+</a>

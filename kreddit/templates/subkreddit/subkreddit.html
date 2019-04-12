@@ -1,50 +1,41 @@
 <style></style>
-{% include "../navbar.html" %}
-{% if validsub %}
-  <form method="post">
-    {% csrf_token %}
-    {% if is_subbed %}
-      <button type="submit" name="unsubscribe" value="{{sub.id}}">
-        Unsubscribe :/
-      </button>
-    {% else %}
-      <button type="submit" name="subscribe" value="{{sub.id}}">
-        Subscribe!
-      </button>
-    {% endif %}
-  </form>
-  <h1>{{ sub.title }}</h1>
-  <h5>About: {{ sub.about }}</h5>
-  <h5>Rules: {{ sub.rules }}</h5>
+{% include "../navbar.html" %} {% if validsub %}
+<form method="post">
+  {% csrf_token %} {% if is_subbed %}
+  <button type="submit" name="unsubscribe" value="{{ sub.id }}">
+    Unsubscribe :/
+  </button>
+  {% else %}
+  <button type="submit" name="subscribe" value="{{ sub.id }}">
+    Subscribe!
+  </button>
+  {% endif %}
+</form>
+<h1>{{ sub.title }}</h1>
+<h5>About: {{ sub.about }}</h5>
+<h5>Rules: {{ sub.rules }}</h5>
 
-  {%if validuser %}
-    <h2>New post</h2>
-    {% include "../generic_form.html"%}
-  {%else%}
-    <h2>Login to make a new post</h2>
-  {%endif%} 
-
-{% if posts %}
-  {%for post in posts%}
-    <div>Post------------</div>
-    <a href="{%url 'post' sub.title post.pk%}">
-      <div>{{ post.title }}</div>
-    </a>
-    <div>Posted by: {{ post.user }}</div>
-    <div>Kreddit Score: {{ post.get_score }}</div>
-    <div>Date Created: {{ post.date_created }}</div>
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
-      <button type="submit" name="downvote" value="{{ post.id }}">
-        Downvote
-      </button>
-    </form>
-    <div>Post------------</div>
-  {%endfor%} 
+{%if validuser %}
+<h2>New post</h2>
+{% include "../generic_form.html"%} {%else%}
+<h2>Login to make a new post</h2>
+{%endif%} {% if posts %} {%for post in posts%}
+<div>Post------------</div>
+<a href="{%url 'post' sub.title post.pk%}">
+  <div>{{ post.title }}</div>
+</a>
+<div>Posted by: {{ post.user }}</div>
+<div>Kreddit Score: {{ post.get_score }}</div>
+<div>Date Created: {{ post.date_created }}</div>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" name="upvote" value="{{ post.id }}">Upvote</button>
+  <button type="submit" name="downvote" value="{{ post.id }}">
+    Downvote
+  </button>
+</form>
+<div>Post------------</div>
+{%endfor%} {%else%} No Post Yet, Kind of Telling if you Ask me {%endif%}
 {%else%}
-  No Post Yet, Kind of Telling if you Ask me
-{%endif%}
-{%else%}
-  <h2>This sub doesn't seem to exist, Try creating one or go outside!</h2>
+<h2>This sub doesn't seem to exist, Try creating one or go outside!</h2>
 {%endif%}

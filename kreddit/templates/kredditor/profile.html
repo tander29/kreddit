@@ -1,31 +1,48 @@
 <style>
-    .wrapper {margin: 10px auto; width: 1200px}
-    .post-list {padding: 20px; text-align: center; background-color: gray}
-    .sub-label {margin: 10px}
-    .def-sub-msg {margin: 10px; text-align: center}
+  .wrapper {
+    margin: 10px auto;
+    width: 1200px;
+  }
+  .post-list {
+    padding: 20px;
+    text-align: center;
+    background-color: gray;
+  }
+  .sub-label {
+    margin: 10px;
+  }
+  .def-sub-msg {
+    margin: 10px;
+    text-align: center;
+  }
 </style>
 {% include 'navbar.html' %}
 <div class="container wrapper">
-    <div class="row">
-        <div class="col">
-            <div class="card row">
-                <div class="card-body">
-                    <h2 class="card-title">{{user.first_name}} {{user.last_name}}</h2>
-                    <h3 class="card-subtitle mb-2 text-muted">u/{{user.username}}</h3>
-                    <p class="card-text">Kredditscore: 0</p>
-                    <p class="card-text">Joined the Kreddit Kommunity on {{user.date_joined}}</p>
-                </div>
-            </div>
-            <h4 class="sub-label">SubKriptions:</h4>
-            <div class="card row">
-                <p class="def-sub-msg">u/{{user.username}} hasn't added any SubKreddits. Head to our SubKreddit page and get adding!</p>
-            </div>
+  <div class="row">
+    <div class="col">
+      <div class="card row">
+        <div class="card-body">
+          <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
+          <h3 class="card-subtitle mb-2 text-muted">u/{{ user.username }}</h3>
+          <p class="card-text">Kredditscore: Working on it</p>
+          <p class="card-text">
+            Joined the Kreddit Kommunity on {{ user.date_joined }}
+          </p>
         </div>
-        <div class="col post-list">
-            {% if posts %}
-            {% else %}
-            Looks like u/{{user.username}} hasn't posted anything yet :(
-            {% endif %}
-        </div>
+      </div>
+      <h4 class="sub-label">SubKreddits Created:</h4>
+      <div class="card row">
+        <p class="def-sub-msg">
+          {%if subscribed %} {%include '../subkreddit/subscriptionlist.html'%}
+          {%else%} u/{{ user.username }}
+          hasn't added any SubKreddits. Head to our SubKreddit page and get
+          adding! {%endif%}
+        </p>
+      </div>
     </div>
+    <div class="col post-list">
+      {% if posts %} {%include '../post/singlepost.html'%} {% else %} Looks like
+      u/{{ user.username }} hasn't posted anything yet :( {% endif %}
+    </div>
+  </div>
 </div>
